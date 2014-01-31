@@ -13,14 +13,10 @@
     <body>
         <div id="map"></div>
         <script>
-            var from_location = '<?= $this->from_location ?>';
-            var to_location = '<?= $this->to_location ?>';
-            if (from_location != null && from_location.length > 0 && to_location != null && to_location.length > 0)
-    	    {
-        		$("#from").val(decodeURIComponent(from_location));
-        		$("#to").val(decodeURIComponent(to_location));
-                $("#view").click();
-    	    }
+            // (optional) Set an average fuel consumption of 4.1 l/100km (Default 5.0)
+            mileagifyJS.config.avg_consumption = 4.1;
+            // (optional) Set the price of a litre of fuel 1.35 (Default 1.4)
+            mileagifyJS.config.price_fuel = 1.35;
         </script>
     </body>
 </html>
