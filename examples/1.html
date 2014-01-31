@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Example 1</title>
+        <script src="http://maps.google.com/maps/api/js?sensor=true&language=en&region=es"></script>
+        <script src="../lib/mileagify.js"></script>
+    </head>
+    <body>
+        <script>
+            // (optional) Set an average fuel consumption of 7.2 l/100km (Default 5.0)
+            mileagifyJS.config.avg_consumption = 7.2;
+            // (optional) Set the price of a litre of fuel 1.52 (Default 1.4)
+            mileagifyJS.config.price_fuel = 1.52;
+            // From Rome (Italy) to Paris (France)
+            mileagifyJS.route.calculate("rome", "paris", function(err, data) {
+                if(data) {
+                    // Check the console!
+                    console.log(data);
+                    var fuel = mileagifyJS.route.getFuelStat(data.eco_m);
+                    console.log("Total fuel consumption: " + fuel + " litres");
+                    var co2 = mileagifyJS.route.getCO2Stat(fuel);
+                    console.log("Total CO2 wasted: " + co2 + " kg");
+                    var money = mileagifyJS.route.getMoneyStat(fuel);
+                    console.log("Total fuel cost: " + money);
+                }
+            });
+        </script>
+    </body>
+</html>
