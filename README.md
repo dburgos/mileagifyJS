@@ -13,18 +13,34 @@ Check out the [online demo](http://davidburgosonline.com/mileagify). It's an exa
 ![Mileagify](http://davidburgosonline.com/wp-content/uploads/2012/10/mileagify_routing_app.jpg)
 
 ## API Documentation
-### mileagifyJS.config - Config options
-#### unit_system 
-METRIC or IMPERIAL. More info https://developers.google.com/maps/documentation/directions/#UnitSystems
-#### region
+###  Config module
+#### mileagifyJS.config.unit_system
+METRIC (Default) or IMPERIAL. More info https://developers.google.com/maps/documentation/directions/#UnitSystems
+```javascript
+// Example: set IMPERIAL as Unit System
+mileagifyJS.config.unit_system = "IMPERIAL";
+```
+#### mileagifyJS.config.region
 Avoid conflicts in cities with same name. More info https://developers.google.com/maps/documentation/directions/#RegionBiasing
-#### avg_consumption
+```javascript
+// Example: set 'es' for Spain
+mileagifyJS.config.region = "es";
+```
+#### mileagifyJS.config.avg_consumption
 Average fuel consumption (l/100km, litres per 100km) Default 5.0 l/100km
-#### price_fuel
+```javascript
+// Example: set avg fuel consumption to 7.3 l/100km
+mileagifyJS.config.avg_consumption = 7.3;
+```
+#### mileagifyJS.config.price_fuel
 Cost of a litre of fuel (no currency) Default 1.4
+```javascript
+// Example: set fuel cost to 0.86
+mileagifyJS.config.price_fuel = 0.86;
+```
 
 ### mileagifyJS.map - Map module
-#### object 
+#### object
 Variable for google.maps.Map object
 #### render(idDOMElement, [latitude, longitude])
 Render a map with the coords in the selector dom element
@@ -36,9 +52,9 @@ Get the position of the device by the HTML5 geolocation API
 Convert a text (place, street, country, ...) to a coords [lat, lng]
 
 ### mileagifyJS.route - Route module
-#### setFrom(input, callback) 
+#### setFrom(input, callback)
 Set the start point. Input can be text or coords. Example: "rome, italy" or [41.900233,12.481735]
-#### setTo(input, callback) 
+#### setTo(input, callback)
 Set the end point. Input can be text or coords. Example: "munich, germany" or [48.145931,11.584976]
 #### eco
 Object for the best fuel saving route. Has render() for display
