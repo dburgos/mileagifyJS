@@ -39,17 +39,41 @@ Cost of a litre of fuel (no currency) Default 1.4
 mileagifyJS.config.price_fuel = 0.86;
 ```
 
-### mileagifyJS.map - Map module
-#### object
+### Map module
+#### mileagifyJS.map.object
 Variable for google.maps.Map object
-#### render(idDOMElement, [latitude, longitude])
+#### mileagifyJS.map.render(idDOMElement, [latitude, longitude])
 Render a map with the coords in the selector dom element
-#### isValidCoords(latitude, longitude)
+```javascript
+// Example: render London coords in the #map DOM element
+mileagifyJS.map.render('map', [51.519243, -0.127691]);
+```
+#### mileagifyJS.map.isValidCoords(latitude, longitude)
 Check the coordinates, return TRUE or FALSE
-#### getLocation(callback)
+```javascript
+// Example: check if London coords are valid
+mileagifyJS.map.isValidCoords(51.519243, -0.127691); // returns TRUE
+// Check random fake coords
+mileagifyJS.map.isValidCoords(195.2444, -208.1235); // returns FALSE
+```
+#### mileagifyJS.map.getLocation(callback)
 Get the position of the device by the HTML5 geolocation API
-#### text2LatLng(placetext, callback)
+```javascript
+// If possible, get device position by HTML5 geolocation API
+mileagifyJS.map.getLocation(function(err, location) {
+	var lat = location.coords.latitude;
+	var lng = location.coords.longitude;
+});
+```
+#### mileagifyJS.map.text2LatLng(placetext, callback)
 Convert a text (place, street, country, ...) to a coords [lat, lng]
+```javascript
+// If possible, get device position by HTML5 geolocation API
+mileagifyJS.map.text2LatLng('london', function(latLng) {
+	var lat = latLng[0];
+	var lng = latLng[1];
+});
+```
 
 ### mileagifyJS.route - Route module
 #### setFrom(input, callback)
