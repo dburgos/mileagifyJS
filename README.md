@@ -75,18 +75,42 @@ mileagifyJS.map.text2LatLng('london', function(latLng) {
 });
 ```
 
-### mileagifyJS.route - Route module
-#### setFrom(input, callback)
+### Route module
+#### mileagifyJS.route.setFrom(input, callback)
 Set the start point. Input can be text or coords. Example: "rome, italy" or [41.900233,12.481735]
-#### setTo(input, callback)
+```javascript
+// Set from London
+mileagifyJS.route.setFrom('london', function() {
+  // whatever
+  // currently, callback() doesn't return anything
+});
+// Set from Rome, Italy coords
+mileagifyJS.route.setFrom([41.900233,12.481735], function() {
+  // whatever
+  // currently, callback() doesn't return anything
+});
+```
+#### mileagifyJS.route.setTo(input, callback)
 Set the end point. Input can be text or coords. Example: "munich, germany" or [48.145931,11.584976]
-#### eco
+```javascript
+// Set to London
+mileagifyJS.route.setTo('london', function() {
+  // whatever
+  // currently, callback() doesn't return anything
+});
+// Set to Rome, Italy coords
+mileagifyJS.route.setTo([41.900233,12.481735], function() {
+  // whatever
+  // currently, callback() doesn't return anything
+});
+```
+#### mileagifyJS.route.eco
 Object for the best fuel saving route. Has render() for display
-#### gmDefault
+#### mileagifyJS.route.gmDefault
 The same for the Google Maps API's default route. Has render() for display
 #### showDirections(idDOMElement)
 Print the how to go indications in the DOM element with the ID.
-#### calculate(from, to, callback)
+#### mileagifyJS.route.calculate(from, to, callback)
 Get the fuel saving routes from the start point to end point, return a JSON:
 ```javascript
 // Ouput example
@@ -100,13 +124,24 @@ Get the fuel saving routes from the start point to end point, return a JSON:
   hasDiff: true // Flag indicating if are the different or not
 }
 ```
-#### getFuelStat(meters)
+#### mileagifyJS.route.getFuelStat(meters)
 Return the average fuel consumption per l/100km
-#### getCO2Stat(fuel_litres)
+```javascript
+// Get the fuel consumption (litres/100km)
+mileagifyJS.route.getFuelStat(2000);
+```
+#### mileagifyJS.route.getCO2Stat(fuel_litres)
 Return the CO2 (kg) wasted by fuel consumption
-#### getMoneyStat(fuel_litres)
+```javascript
+// Get the CO2 wasted
+mileagifyJS.route.getCO2Stat(6.5);
+```
+#### mileagifyJS.route.getMoneyStat(fuel_litres)
 Return the money wasted by fuel consumption
-
+```javascript
+// Get the CO2 wasted
+mileagifyJS.route.getMoneyStat(16.7);
+```
 
 Any feedback is welcome
 
