@@ -76,71 +76,80 @@ mileagifyJS.map.text2LatLng('london', function(latLng) {
 ```
 
 ### Route module
-#### mileagifyJS.route.setFrom(input, callback)
-Set the start point. Input can be text or coords. Example: "rome, italy" or [41.900233,12.481735]
+#### mileagifyJS.route.calculate(from, to, callback)
+Get the fuel saving routes from the start point to end point
 ```javascript
-// Set from London
-mileagifyJS.route.setFrom('london', function() {
-  // whatever
-  // currently, callback() doesn't return anything
-});
-// Set from Rome, Italy coords
-mileagifyJS.route.setFrom([41.900233,12.481735], function() {
-  // whatever
-  // currently, callback() doesn't return anything
+// Render the mileagifyJS route
+mileagifyJS.route.calculate('rome,italy','munich,germany', function(err, data) {
+  console.log(data);
+  /* Output example:
+  var data =
+  {
+    from: { name: 'rome, italy', lat: 41.900233, lng: 12.481735}, // start point data
+    to: { name: 'munich, germany', lat: 48.145931, lng: 11.584976},  // end point data
+    gm_m: 945202, // meters of the GM API's default route
+    gm_s: 47361, // estimated seconds of the GM API's default route
+    eco_m: 923620, // meters of the suggested route by MileagifyJS
+    eco_s: 30719, // estimated seconds of the suggested route by MileagifyJS
+    hasDiff: true // Flag indicating if are the different or not
+  };
+  */
 });
 ```
-#### mileagifyJS.route.setTo(input, callback)
-Set the end point. Input can be text or coords. Example: "munich, germany" or [48.145931,11.584976]
+You can also set FROM and/or TO as coords. Example:
 ```javascript
-// Set to London
-mileagifyJS.route.setTo('london', function() {
-  // whatever
-  // currently, callback() doesn't return anything
-});
-// Set to Rome, Italy coords
-mileagifyJS.route.setTo([41.900233,12.481735], function() {
-  // whatever
-  // currently, callback() doesn't return anything
+// Render the mileagifyJS route
+mileagifyJS.route.calculate([41.900233, 12.481735],[48.145931, 11.584976], function(err, data) {
+  console.log(data);
+  /* Same output
+  var data =
+  {
+    from: { name: 'rome, italy', lat: 41.900233, lng: 12.481735}, // start point data
+    to: { name: 'munich, germany', lat: 48.145931, lng: 11.584976},  // end point data
+    gm_m: 945202, // meters of the GM API's default route
+    gm_s: 47361, // estimated seconds of the GM API's default route
+    eco_m: 923620, // meters of the suggested route by MileagifyJS
+    eco_s: 30719, // estimated seconds of the suggested route by MileagifyJS
+    hasDiff: true // Flag indicating if are the different or not
+  };
+  */
 });
 ```
 #### mileagifyJS.route.eco
 Object for the best fuel saving route. Has render() for display
+```javascript
+// Render the mileagifyJS route
+mileagifyJS.route.eco.render();
+```
 #### mileagifyJS.route.gmDefault
 The same for the Google Maps API's default route. Has render() for display
-#### showDirections(idDOMElement)
-Print the how to go indications in the DOM element with the ID.
-#### mileagifyJS.route.calculate(from, to, callback)
-Get the fuel saving routes from the start point to end point, return a JSON:
 ```javascript
-// Ouput example
-{
-  from: { name: 'rome, italy', lat: 41.900233, lng: 12.481735}, // start point data
-  to: { name: 'munich, germany', lat: 48.145931, lng: 11.584976},  // end point data
-  gm_m: 945202, // meters of the GM API's default route
-  gm_s: 47361, // estimated seconds of the GM API's default route
-  eco_m: 923620, // meters of the suggested route by MileagifyJS
-  eco_s: 30719, // estimated seconds of the suggested route by MileagifyJS
-  hasDiff: true // Flag indicating if are the different or not
-}
+// Render the Google Map route
+mileagifyJS.route.gmDefault.render();
+```
+#### mileagifyJS.route.showDirections(idDOMElement)
+Print the how-to-go indications in the DOM element with the ID.
+```javascript
+// Render the how-to-go indications in #map_indications DOM element
+mileagifyJS.route.showDirections('map_indications');
 ```
 #### mileagifyJS.route.getFuelStat(meters)
 Return the average fuel consumption per l/100km
 ```javascript
-// Get the fuel consumption (litres/100km)
-mileagifyJS.route.getFuelStat(2000);
+// Get the fuel consumption for 100km (100,000m)
+mileagifyJS.route.getFuelStat(100000); // 5.00
 ```
 #### mileagifyJS.route.getCO2Stat(fuel_litres)
 Return the CO2 (kg) wasted by fuel consumption
 ```javascript
-// Get the CO2 wasted
-mileagifyJS.route.getCO2Stat(6.5);
+// Get the CO2 wasted (kg)
+mileagifyJS.route.getCO2Stat(5); // 12.5
 ```
 #### mileagifyJS.route.getMoneyStat(fuel_litres)
 Return the money wasted by fuel consumption
 ```javascript
 // Get the CO2 wasted
-mileagifyJS.route.getMoneyStat(16.7);
+mileagifyJS.route.getMoneyStat(12.5); // 17.5
 ```
 
 Any feedback is welcome
